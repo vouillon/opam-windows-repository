@@ -1,0 +1,15 @@
+opam-version: "1"
+maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
+substs: ["setup.data"]
+build: [
+  ["oasis" "setup"]
+  ["ocaml" "setup.ml" "-configure"
+     "--override" "ocamlfind"
+        "/home/jerome/.opam/4.00.1/bin/i686-w64-mingw32-ocamlfind"
+     "--override" "os_type" "Win32" "--disable-pthread" "--disable-libev"
+     "--enable-ssl"]
+  ["ocaml" "setup.ml" "-build"]
+  ["ocaml" "setup.ml" "-install"]
+]
+remove: [["ocamlfind" "-toolchain" "windows" "remove" "lwt"]]
+depends: ["oasis" { = "0.3.0-1" } "windows-ocamlfind" "windows-ssl"]

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+PREFIX=$1
+ANDROID_NDK=$PREFIX/lib/android-ndk-linux
+EXEC_PREFIX=i686-w64-mingw32-
+TOOLCHAIN=${ANDROID_NDK}/toolchains/${EXEC_PREFIX}4.7/prebuilt/linux-x86/bin
+
+export CROSS_COMPILE=$EXEC_PREFIX
+
+./Configure mingw64 no-asm shared --prefix=$HOME/W32 zlib --with-zlib-include=$HOME/W32/include --with-zlib-lib=$HOME/W32/lib
+
+make
+make install

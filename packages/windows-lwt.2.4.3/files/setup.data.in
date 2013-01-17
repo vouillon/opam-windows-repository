@@ -1,0 +1,3 @@
+ocamlc="%{bin}%/i686-w64-mingw32-ocamlc"
+prefix="%{prefix}%"
+datarootdir="$prefix/share"

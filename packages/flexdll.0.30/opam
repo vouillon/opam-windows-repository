@@ -1,0 +1,15 @@
+opam-version: "1"
+maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
+build: [
+  ["make" "build_mingw" "flexlink.exe"]
+  ["mkdir" "-p" "%{prefix}%/i686-w64-mingw32/lib/flexdll"]
+  ["cp" "flexlink.exe" "flexdll.h" "flexdll_mingw.o" "flexdll_initer_mingw.o"
+     "%{prefix}%/i686-w64-mingw32/lib/flexdll/"]
+  ["ln" "-sf" "%{prefix}%/i686-w64-mingw32/lib/flexdll/flexlink.exe"
+     "%{bin}%/flexlink"]
+]
+remove: [
+  ["rm" "-f" "%{bin}%/flexlink"]
+  ["rm" "-rf" "%{prefix}%/i686-w64-mingw32/lib/flexdll"]
+]
+patches: ["flexdll.patch"]
