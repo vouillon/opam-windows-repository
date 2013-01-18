@@ -9,3 +9,4 @@ build: [
   ["make" "install" "PATH=%{bin}%/i686-w64-mingw32:%{PATH}%"]
 ]
 remove: [["ocamlfind" "-toolchain" "windows" "remove" "lablgtk2"]]
+depends: ["windows-ocamlfind" "windows-c-gtk"]
