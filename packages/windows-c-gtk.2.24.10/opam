@@ -1,0 +1,6 @@
+opam-version: "1"
+maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
+build: [
+  ["mkdir" "-p" "%{prefix}%/i686-w64-mingw32/lib"]
+  ["cp" "-r" "." "%{prefix}%/i686-w64-mingw32/lib/gtk"]
+]
