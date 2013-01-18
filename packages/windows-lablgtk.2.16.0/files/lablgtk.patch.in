@@ -32,12 +32,20 @@
  USE_GNOMEUI=
  USE_PANEL=
  USE_GTKSPELL=
-@@ -37,10 +37,10 @@
+@@ -30,17 +30,17 @@
+ USE_CC=
+ DEBUG=
+ CC=gcc
+-RANLIB=ranlib
++RANLIB=i686-w64-mingw32-ranlib
+ XA=.a
+ XB=
+ XE=
  XO=.o
  XS=.dll
  TOOLCHAIN=unix
 -LIBDIR=C:\Program Files\Objective Caml\lib
-+LIBDIR=$(prefix)/lib
++LIBDIR=$(PREFIX)/lib
  THREADS_LIB=system
 -HAS_DLL_SUPPORT=yes
 -HAS_NATIVE_DYNLINK=yes
