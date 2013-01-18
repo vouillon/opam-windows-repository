@@ -8,4 +8,4 @@ build: [
   ["cp" "unison.exe" "%{prefix}%/i686-w64-mingw32/bin/unison-gtk.exe"]
 ]
 remove: [["rm" "%{prefix}%/i686-w64-mingw32/bin/unison-gtk.exe"]]
-depends: ["ocaml-windows" "window-lablgtk"]
+depends: ["ocaml-windows" "windows-lablgtk"]
