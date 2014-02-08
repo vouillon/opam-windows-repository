@@ -1,0 +1,6 @@
+path(win64)="%{prefix}%/x86_64-w64-mingw32/lib"
+destdir(win64)="%{prefix}%/x86_64-w64-mingw32/lib"
+stdlib(win64)="%{prefix}%/x86_64-w64-mingw32/lib/ocaml"
+ocamlc(win64)="x86_64-w64-mingw32-ocamlc"
+ocamlopt(win64)="x86_64-w64-mingw32-ocamlopt"
+ocamlmklib(win64)="x86_64-w64-mingw32-ocamlmklib"

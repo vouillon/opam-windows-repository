@@ -1,9 +1,0 @@
-opam-version: "1"
-maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
-build: [[
-  "make" "OCAML_SRC=%{lib}%/ocaml-src"
-         "W32_PREFIX=%{prefix}%/i686-w64-mingw32"
-         "W32_BINDIR=%{bin}%"
-]]
-remove: [[ "./remove.sh" "%{prefix}%" ]]
-depends: ["ocaml-src" {= "4.00.1"} "flexdll"]

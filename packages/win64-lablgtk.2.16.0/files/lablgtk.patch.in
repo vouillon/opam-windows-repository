@@ -1,0 +1,98 @@
+--- config.make.mingw-
++++ config.make.mingw
+@@ -1,13 +1,13 @@
+ # -*- makefile -*-
+ 
+ datarootdir = ${prefix}/share
+-CAMLC=ocamlc.opt
+-CAMLOPT=ocamlopt.opt
++CAMLC=x86_64-w64-mingw32-ocamlc -custom
++CAMLOPT=x86_64-w64-mingw32-ocamlopt
+ CAMLRUN=ocamlrun
+ CAMLDEP=ocamldep
+ OCAMLDOC=ocamldoc
+-CAMLMKTOP=ocamlmktop
+-CAMLMKLIB=ocamlmklib
++CAMLMKTOP=x86_64-w64-mingw32-ocamlmktop -custom
++CAMLMKLIB=x86_64-w64-mingw32-ocamlmklib
+ CAMLP4O=camlp4o
+ CAMLBEST=opt
+ CAMLWIN32=yes
+@@ -17,10 +17,10 @@
+ EXE=.exe
+ 
+ USE_GL=
+-USE_GLADE=1
+-USE_RSVG=1
++USE_GLADE=
++USE_RSVG=
+ HAVE_SVGZ=
+-USE_GNOMECANVAS=1
++USE_GNOMECANVAS=
+ USE_GNOMEUI=
+ USE_PANEL=
+ USE_GTKSPELL=
+@@ -30,17 +30,17 @@
+ USE_CC=
+ DEBUG=
+ CC=gcc
+-RANLIB=ranlib
++RANLIB=x86_64-w64-mingw32-ranlib
+ XA=.a
+ XB=
+ XE=
+ XO=.o
+ XS=.dll
+ TOOLCHAIN=unix
+-LIBDIR=C:\Program Files\Objective Caml\lib
++LIBDIR=$(PREFIX)/lib
+ THREADS_LIB=system
+-HAS_DLL_SUPPORT=yes
+-HAS_NATIVE_DYNLINK=yes
++HAS_DLL_SUPPORT=no
++HAS_NATIVE_DYNLINK=no
+ 
+ # if using ocaml >= 3.08, add a -D OCAML_308 (for camlp4)
+ ODOC_DEF=-D OCAML_308
+@@ -49,30 +49,31 @@
+ HAS_PRINTEXC_BACKTRACE=-D HAS_PRINTEXC_BACKTRACE
+ 
+ # where to install the binaries
+-prefix=/Program Files/Objective Caml
++prefix=%{prefix}%/x86_64-w64-mingw32
+ exec_prefix=${prefix}
+-BINDIR=$(DESTDIR)${exec_prefix}/bin
++BINDIR=${exec_prefix}/bin
+ 
+ # where to install the man page
+-MANDIR=$(DESTDIR)${datarootdir}/man
++MANDIR=${datarootdir}/man
+ 
+-INSTALLDIR=$(DESTDIR)C:\Program Files\Objective Caml\lib/lablgtk2
+-DLLDIR=$(DESTDIR)C:\Program Files\Objective Caml\lib/stublibs
++INSTALLDIR=$(prefix)/lib/lablgtk2
++DLLDIR=$(prefix)/lib/stublibs
+ LABLGLDIR=
+ 
+ FILT = -Wl,--export-dynamic
+ clean_libs = $(subst -pthread,-ldopt -pthread -ccopt -pthread,$(subst --rpath,-rpath,$(filter-out $(FILT),$(1))))
+ 
+-GTKCFLAGS=-mms-bitfields -IC:/opt/gtk/include/gtk-2.0 -IC:/opt/gtk/lib/gtk-2.0/include -IC:/opt/gtk/include/atk-1.0 -IC:/opt/gtk/include/cairo -IC:/opt/gtk/include/pango-1.0 -IC:/opt/gtk/include/glib-2.0 -IC:/opt/gtk/lib/glib-2.0/include -IC:/opt/gtk/include/freetype2 -IC:/opt/gtk/include -IC:/opt/gtk/include/libpng12 -IC:/opt/gtk/include/libglade-2.0 -IC:/opt/gtk/include/libxml2 -IC:/opt/gtk/include/librsvg-2 -IC:/opt/gtk/include/libgnomecanvas-2.0 -IC:/opt/gtk/include/gail-1.0 -IC:/opt/gtk/include/libart-2.0  
+-GTK_LIBS = -LC:/opt/gtk/lib -lgtk-win32-2.0 -lgdk-win32-2.0 -latk-1.0 -lgio-2.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
++GTKDIR=%{prefix}%/x86_64-w64-mingw32/lib/gtk
++GTKCFLAGS=-mms-bitfields -I$(GTKDIR)/include/gtk-2.0 -I$(GTKDIR)/lib/gtk-2.0/include -I$(GTKDIR)/include/atk-1.0 -I$(GTKDIR)/include/cairo -I$(GTKDIR)/include/pango-1.0 -I$(GTKDIR)/include/glib-2.0 -I$(GTKDIR)/lib/glib-2.0/include -I$(GTKDIR)/include/freetype2 -I$(GTKDIR)/include -I$(GTKDIR)/include/libpng12 -I$(GTKDIR)/include/libglade-2.0 -I$(GTKDIR)/include/libxml2 -I$(GTKDIR)/include/librsvg-2 -I$(GTKDIR)/include/libgnomecanvas-2.0 -I$(GTKDIR)/include/gail-1.0 -I$(GTKDIR)/include/libart-2.0 -I$(GTKDIR)/include/gdk-pixbuf-2.0  
++GTK_LIBS = -L$(GTKDIR)/lib -lgtk-win32-2.0 -lgdk-win32-2.0 -latk-1.0 -lgio-2.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
+ GTKLIBS:=$(call clean_libs,$(GTK_LIBS))
+ GTKGL_LIBS = 
+ GTKGLLIBS:=$(call clean_libs,$(GTKGL_LIBS))
+-GLADE_LIBS = -LC:/opt/gtk/lib -lglade-2.0 -lgtk-win32-2.0 -lxml2 -lgdk-win32-2.0 -latk-1.0 -lgio-2.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
++GLADE_LIBS = -L$(GTKDIR)/lib -lglade-2.0 -lgtk-win32-2.0 -lxml2 -lgdk-win32-2.0 -latk-1.0 -lgio-2.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
+ GLADELIBS:=$(call clean_libs,$(GLADE_LIBS))
+-RSVG_LIBS = -LC:/opt/gtk/lib -lrsvg-2 -lgdk_pixbuf-2.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
++RSVG_LIBS = -L$(GTKDIR)/lib -lrsvg-2 -lgdk_pixbuf-2.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
+ RSVGLIBS:=$(call clean_libs,$(RSVG_LIBS))
+-GNOMECANVAS_LIBS = -LC:/opt/gtk/lib -lgnomecanvas-2 -lart_lgpl_2 -lgtk-win32-2.0 -lgdk-win32-2.0 -latk-1.0 -lgio-2.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
++GNOMECANVAS_LIBS = -L$(GTKDIR)/lib -lgnomecanvas-2 -lart_lgpl_2 -lgtk-win32-2.0 -lgdk-win32-2.0 -latk-1.0 -lgio-2.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl  
+ GNOMECANVASLIBS:=$(call clean_libs,$(GNOMECANVAS_LIBS))
+ GNOMEUI_LIBS = 
+ GNOMEUILIBS:=$(call clean_libs,$(GNOMEUI_LIBS))
