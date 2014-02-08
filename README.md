@@ -6,7 +6,7 @@ OCaml cross-compilers for Windows: packages description for OPAM
 ---
 
 * Prerequisites:
-  * C cross-compiler(s): `i686-w64-mingw32-gcc` or `x86_64-w64-mingw32-gcc'
+  * C cross-compiler: `i686-w64-mingw32-gcc` and/or `x86_64-w64-mingw32-gcc`
 
 * How to install:  
   `$ opam switch 4.00.1`  
@@ -31,5 +31,5 @@ OCaml cross-compilers for Windows: packages description for OPAM
 * Issues:
   * To compile i686 packages on x86_64 machines, need the glibc.i686 package
   * On old fedora versions (< 17), the C cross-compiler for i686 was named
-    `i686-pc-mingw32-gcc` and not `i686-w64-mingw32-gcc` => run
+    `i686-pc-mingw32-gcc` and not `i686-w64-mingw32-gcc`. Please run
     some `ln -sf` commands to fix it before installing ocaml cross-compilers
