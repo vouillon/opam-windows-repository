@@ -1,7 +1,6 @@
 #! /bin/bash -ex
 
 PREFIX="$1"
-PATH="$2"
 
 cp config.make.mingw config.make
 make -C src propcc varcc CAMLC=ocamlc
