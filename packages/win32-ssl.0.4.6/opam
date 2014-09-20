@@ -1,8 +1,0 @@
-opam-version: "1"
-maintainer: "contact@ocamlpro.com"
-build: [["./build.sh" "%{prefix}%"]]
-remove: [
-  ["ocamlfind" "-toolchain" "win32" "remove" "ssl"]
-  ["rm" "-f" "%{prefix}%/i686-w64-mingw32/bin/openssl.exe"]
-]
-depends: ["win32-ocamlfind" "win32-c-openssl"]

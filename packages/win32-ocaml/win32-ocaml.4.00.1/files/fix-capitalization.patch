@@ -1,0 +1,11 @@
+--- ./otherlibs/systhreads/st_win32.h~	2013-01-09 23:02:56.495510942 +0100
++++ ./otherlibs/systhreads/st_win32.h	2013-01-16 23:19:06.224156459 +0100
+@@ -17,7 +17,7 @@
+ 
+ #define _WIN32_WINNT 0x0400
+ #include <windows.h>
+-#include <WinError.h>
++#include <winerror.h>
+ #include <stdio.h>
+ #include <signal.h>
+ 

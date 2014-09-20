@@ -1,0 +1,17 @@
+opam-version: "1"
+maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
+build: [[
+  "make" "-f" "Makefile.win32"
+         "WIN_PREFIX=%{prefix}%/i686-w64-mingw32"
+         "WIN_BINDIR=%{bin}%"
+         "MINGW_PREF=i686-w64-mingw32"
+         "WORD_SIZE=32"
+]]
+remove: [[
+  "make" "-f" "Makefile.win32"
+         "PREFIX=%{prefix}%"
+         "MINGW_PREF=i686-w64-mingw32"
+         "uninstall"
+]]
+ocaml-version: [ = "4.01.0" ]
+depends: [ "win32-flexdll" ]

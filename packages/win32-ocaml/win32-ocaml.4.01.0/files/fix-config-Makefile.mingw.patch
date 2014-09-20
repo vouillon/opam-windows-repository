@@ -1,0 +1,51 @@
+diff -Naur ocaml-4.01.0-old/config/Makefile.mingw ocaml-4.01.0-new/config/Makefile.mingw
+--- config/Makefile.mingw	2013-05-17 14:03:58.000000000 +0200
++++ config/Makefile.mingw	2014-09-20 11:41:22.830403279 +0200
+@@ -15,16 +15,16 @@
+ 
+ ######### General configuration
+ 
+-PREFIX=C:/ocamlmgw
++PREFIX=WIN_PREFIX
+ 
+ ### Remove this to disable compiling camlp4
+-CAMLP4=camlp4
++CAMLP4=
+ 
+ ### Where to install the binaries
+ BINDIR=$(PREFIX)/bin
+ 
+ ### Where to install the standard library
+-LIBDIR=$(PREFIX)/lib
++LIBDIR=$(PREFIX)/lib/ocaml
+ 
+ ### Where to install the stub DLLs
+ STUBLIBDIR=$(LIBDIR)/stublibs
+@@ -73,15 +73,15 @@
+ CC_PROFILE=
+ SYSTHREAD_SUPPORT=true
+ EXTRALIBS=
+-NATDYNLINK=true
+-CMXS=cmxs
++NATDYNLINK=false
++CMXS=cmxa
+ RUNTIMED=noruntimed
+ ASM_CFI_SUPPORTED=false
+ 
+ ########## Configuration for the bytecode compiler
+ 
+ ### Which C compiler to use for the bytecode interpreter.
+-BYTECC=$(TOOLPREF)gcc
++BYTECC=$(TOOLPREF)gcc -I$(PREFIX)/include -L$(PREFIX)/lib
+ 
+ ### Additional compile-time options for $(BYTECC).  (For static linking.)
+ BYTECCCOMPOPTS=-O -mms-bitfields -Wall -Wno-unused
+@@ -147,7 +147,7 @@
+ 
+ ############# Configuration for the contributed libraries
+ 
+-OTHERLIBRARIES=win32unix str num win32graph dynlink bigarray systhreads labltk
++OTHERLIBRARIES=win32unix str num win32graph dynlink bigarray systhreads
+ 
+ ### Name of the target architecture for the "num" library
+ BNG_ARCH=ia32

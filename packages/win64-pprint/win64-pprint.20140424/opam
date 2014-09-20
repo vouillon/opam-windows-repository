@@ -1,0 +1,5 @@
+opam-version: "1"
+maintainer: "benoit.vaugon@gmail.com"
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
+depends: [ "win64-ocaml" ]

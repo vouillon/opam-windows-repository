@@ -1,0 +1,9 @@
+opam-version: "1"
+maintainer: "benoit.vaugon@gmail.com"
+authors: [ "Hugo Heuzard" ]
+license: "LGPL-2.1 with OCaml linking exception"
+homepage: "https://github.com/hhugo/odate"
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
+depends: [ "win32-ocaml" "win32-menhir" ]
+ocaml-version: [ >= "4.00.0" ]

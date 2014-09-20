@@ -1,0 +1,42 @@
+--- config/Makefile.mingw64	2013-01-09 23:02:56.531510943 +0100
++++ config/Makefile.mingw64	2013-01-17 21:25:45.156110719 +0100
+@@ -17,16 +17,16 @@
+ 
+ ######### General configuration
+ 
+-PREFIX=C:/ocamlmgw64
++PREFIX=WIN_PREFIX
+ 
+ ### Remove this to disable compiling camlp4
+-CAMLP4=camlp4
++CAMLP4=
+ 
+ ### Where to install the binaries
+-BINDIR=$(PREFIX)/bin
++BINDIR=WIN_PREFIX/bin
+ 
+ ### Where to install the standard library
+-LIBDIR=$(PREFIX)/lib
++LIBDIR=$(PREFIX)/lib/ocaml
+ 
+ ### Where to install the stub DLLs
+ STUBLIBDIR=$(LIBDIR)/stublibs
+@@ -77,15 +77,15 @@
+ CC_PROFILE=
+ SYSTHREAD_SUPPORT=true
+ EXTRALIBS=
+-NATDYNLINK=true
+-CMXS=cmxs
++NATDYNLINK=false
++CMXS=cmxa
+ RUNTIMED=noruntimed
+ ASM_CFI_SUPPORTED=false
+ 
+ ########## Configuration for the bytecode compiler
+ 
+ ### Which C compiler to use for the bytecode interpreter.
+-BYTECC=$(TOOLPREF)gcc
++BYTECC=$(TOOLPREF)gcc -I$(PREFIX)/include -L$(PREFIX)/lib
+ 
+ ### Additional compile-time options for $(BYTECC).  (For static linking.)
+ BYTECCCOMPOPTS=-O -mms-bitfields -Wall -Wno-unused

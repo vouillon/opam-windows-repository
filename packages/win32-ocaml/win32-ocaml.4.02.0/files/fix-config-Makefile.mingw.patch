@@ -1,0 +1,41 @@
+diff -Naur ocaml-4.02.0-old/config/Makefile.mingw ocaml-4.02.0-new/config/Makefile.mingw
+--- config/Makefile.mingw	2014-07-17 16:23:31.000000000 +0200
++++ config/Makefile.mingw	2014-09-20 12:56:30.942544494 +0200
+@@ -15,7 +15,7 @@
+ 
+ ######### General configuration
+ 
+-PREFIX=C:/ocamlmgw
++PREFIX=WIN_PREFIX
+ 
+ ### Remove this to disable compiling ocamldebug
+ WITH_DEBUGGER=ocamldebugger
+@@ -30,7 +30,7 @@
+ BINDIR=$(PREFIX)/bin
+ 
+ ### Where to install the standard library
+-LIBDIR=$(PREFIX)/lib
++LIBDIR=$(PREFIX)/lib/ocaml
+ 
+ ### Where to install the stub DLLs
+ STUBLIBDIR=$(LIBDIR)/stublibs
+@@ -80,8 +80,8 @@
+ CC_PROFILE=
+ SYSTHREAD_SUPPORT=true
+ EXTRALIBS=
+-NATDYNLINK=true
+-CMXS=cmxs
++NATDYNLINK=false
++CMXS=cmxa
+ RUNTIMED=noruntimed
+ ASM_CFI_SUPPORTED=false
+ UNIXLIB=win32unix
+@@ -90,7 +90,7 @@
+ ########## Configuration for the bytecode compiler
+ 
+ ### Which C compiler to use for the bytecode interpreter.
+-BYTECC=$(TOOLPREF)gcc
++BYTECC=$(TOOLPREF)gcc -I$(PREFIX)/include -L$(PREFIX)/lib
+ 
+ ### Additional compile-time options for $(BYTECC).  (For static linking.)
+ BYTECCCOMPOPTS=-O -mms-bitfields -Wall -Wno-unused

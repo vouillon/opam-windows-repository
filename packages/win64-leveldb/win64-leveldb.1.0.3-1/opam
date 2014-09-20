@@ -1,0 +1,9 @@
+opam-version: "1"
+maintainer: "benoit.vaugon@gmail.com"
+homepage: "https://github.com/mfp/ocaml-leveldb"
+license: "LGPL+static"
+doc: [ "https://github.com/mfp/ocaml-leveldb/blob/master/README.md" ]
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
+depends: [ "win64-ocaml" "win64-c-leveldb" ]
+patches: [ "leveldb_stubs.patch" ]
