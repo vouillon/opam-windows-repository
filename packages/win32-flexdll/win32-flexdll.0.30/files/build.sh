@@ -2,14 +2,15 @@
 
 PREFIX="$1"
 BIN="$2"
+LIB="${PREFIX}/lib/flexdll"
 
 make build_mingw flexlink.exe
 
-mkdir -p "${PREFIX}/lib/flexdll"
+mkdir -p "${LIB}"
 
-cp flexlink.exe           "${PREFIX}/lib/flexdll/"
-cp flexdll.h              "${PREFIX}/lib/flexdll/"
-cp flexdll_mingw.o        "${PREFIX}/lib/flexdll/"
-cp flexdll_initer_mingw.o "${PREFIX}/lib/flexdll/"
+cp flexlink.exe           "${LIB}/"
+cp flexdll.h              "${LIB}/"
+cp flexdll_mingw.o        "${LIB}/"
+cp flexdll_initer_mingw.o "${LIB}/"
 
-ln -sf "${PREFIX}/lib/flexdll/flexlink.exe" "${BIN}/flexlink"
+ln -sf "${LIB}/flexlink.exe" "${BIN}/flexlink"
