@@ -1,0 +1,14 @@
+opam-version: "1"
+maintainer: "contact@ocamlpro.com"
+build: [
+  ["./configure" ]
+  [make]
+  [make "install"]
+]
+remove: [[ "rm" "-rf" "%{prefix}%/i686-w64-mingw32/lib/facile" ]]
+depends: [ "win32-ocaml" ]
+patches: [
+  "ocaml_4.00.patch"
+  "config_make.patch"
+]
+

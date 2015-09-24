@@ -1,0 +1,86 @@
+diff -rupN facile-1.1/Makefile facile-1.1-patched/Makefile
+--- facile-1.1/Makefile	2004-09-08 11:51:02.000000000 +0200
++++ facile-1.1-patched/Makefile	2015-09-24 22:45:42.000000000 +0200
+@@ -7,7 +7,7 @@ compile:
+ 
+ install:
+ 	if test -d $(FACILEDIR); then : ; else mkdir $(FACILEDIR); fi
+-	cp src/facile.cmi src/facile.cma src/facile.cmxa src/facile.a $(FACILEDIR)
++	cp META src/facile.cmi src/facile.cma src/facile.cmxa src/facile.a $(FACILEDIR)
+ 	chmod a+r $(FACILEDIR)/facile.cmi
+ 	chmod a+r $(FACILEDIR)/facile.cma
+ 	chmod a+r $(FACILEDIR)/facile.cmxa
+diff -rupN facile-1.1/configure facile-1.1-patched/configure
+--- facile-1.1/configure	2004-09-08 11:51:02.000000000 +0200
++++ facile-1.1-patched/configure	2015-09-24 22:02:11.000000000 +0200
+@@ -7,8 +7,8 @@
+ 
+ ocaml_min_version=3.02
+ echo "Checking for OCaml compiler (>= ${ocaml_min_version})..."
+-if expr `ocamlc -version` \>\= $ocaml_min_version >/dev/null 2>&1; then
+-    version=`ocamlc -version`
++if expr `i686-w64-mingw32-ocamlc -version` \>\= $ocaml_min_version >/dev/null 2>&1; then
++    version=`i686-w64-mingw32-ocamlc -version`
+     echo "OCaml $version found"
+ else
+     echo "Aborting... OCaml compiler is either missing or too old"
+@@ -17,7 +17,7 @@ fi
+ 
+ 
+ # Default place for facile in OCaml library directory
+-faciledir=`ocamlc -where`/facile
++faciledir=`i686-w64-mingw32-ocamlc -where`/../facile
+ 
+ # Parse command-line arguments
+ 
+diff -rupN facile-1.1/src/Makefile facile-1.1-patched/src/Makefile
+--- facile-1.1/src/Makefile	2004-09-08 11:51:02.000000000 +0200
++++ facile-1.1-patched/src/Makefile	2015-09-24 22:47:29.000000000 +0200
+@@ -1,12 +1,12 @@
+ # $Id: Makefile,v 1.73 2004/09/01 12:33:49 barnier Exp $
+ 
+-OCAMLC = ocamlc.opt -g
+-OCAMLMLI = ocamlc.opt
+-OCAMLOPT = ocamlopt -unsafe -noassert -inline 10
+-OCAMLDEP = ocamldep
++OCAMLC = i686-w64-mingw32-ocamlc -g
++OCAMLMLI = i686-w64-mingw32-ocamlc
++OCAMLOPT = i686-w64-mingw32-ocamlopt -unsafe -noassert -inline 10
++OCAMLDEP = i686-w64-mingw32-ocamldep
+ INCLUDES =
+ OPTOPT = 
+-OCAMLLIB := $(shell echo `ocamlc -where`)
++OCAMLLIB := $(shell echo `i686-w64-mingw32-ocamlc -where`)
+-FACILELIB = $(OCAMLLIB)/facile
++FACILELIB = $(OCAMLLIB)/../facile
+ 
+ CSTR= fcl_debug.ml fcl_misc.ml fcl_domain.ml fcl_setDomain.ml fcl_float.ml fcl_stak.ml fcl_data.ml fcl_cstr.ml fcl_var.ml fcl_invariant.ml fcl_reify.ml fcl_boolean.ml fcl_linear.ml fcl_nonlinear.ml fcl_expr.ml fcl_arith.ml fcl_conjunto.ml fcl_goals.ml fcl_fdArray.ml fcl_gcc.ml fcl_opti.ml fcl_alldiff.ml fcl_sorting.ml fcl_interval.ml fcl_genesis.ml facile.ml
+@@ -16,7 +16,7 @@ CSTRCMO = $(CSTR:.ml=.cmo)
+ CSTRCMX = $(CSTR:.ml=.cmx)
+ 
+ # Default target: libraries and toplevel
+-all : facile.cma facile.cmxa facile
++all : facile.cma facile.cmxa facile.exe
+ 
+ # Libraries
+ facile.cma : $(CSTRCMO)
+@@ -34,8 +34,8 @@ facile.p.cmxa : $(CSTR)
+ 	mv facile.a facile.p.a
+ 
+ # Toplevel (to be run with the "-I +facile" option)
+-facile : facile.cma
+-	ocamlmktop -o $@ facile.cma
++facile.exe : facile.cma
++	i686-w64-mingw32-ocamlmktop -o $@ facile.cma
+ 
+ # Experimental: to get inlining of functors using preprocessing:
+ # Does not work with many modules (e.g. containing class expressions
+@@ -64,7 +64,7 @@ facile.exp.cmxa : $(CSTR)
+ 	ocamllex $<
+ 
+ clean:
+-	\rm -f *.cm* *.annot *.o *.a *~ .depend facile
++	\rm -f *.cm* *.annot *.o *.a *~ .depend facile.exe
+ 
+ .depend:
+ 	$(OCAMLDEP) $(INCLUDES) *.mli *.ml > $@
