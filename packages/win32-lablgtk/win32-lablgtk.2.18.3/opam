@@ -1,0 +1,7 @@
+opam-version: "1"
+maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
+substs: [ "lablgtk.patch" ]
+patches: [ "lablgtk.patch" ]
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
+depends: [ "win32-ocaml" "win32-ocamlfind" "win32-c-gtk" "lablgtk" ]
