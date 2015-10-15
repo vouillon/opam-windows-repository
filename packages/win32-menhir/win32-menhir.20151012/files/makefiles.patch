@@ -1,0 +1,37 @@
+--- Makefile
++++ Makefile
+@@ -101,10 +101,10 @@
+ 	cp -r $(MANS) $(mandir)
+ 	@if $(USE_OCAMLFIND) ; then \
+ 	  echo Installing MenhirLib via ocamlfind. ; \
+-	  ocamlfind install menhirLib src/META $(patsubst %,$(BUILDDIR)/%,$(MENHIRLIB)) ; \
++	  i686-w64-mingw32-ocamlfind install menhirLib src/META $(patsubst %,src/_build_win/%,$(MENHIRLIB)) ; \
+ 	else \
+ 	  echo Installing MenhirLib manually. ; \
+-	  install -m 644 $(patsubst %,$(BUILDDIR)/%,$(MENHIRLIB)) $(libdir) ; \
++	  install -m 644 $(patsubst %,src/_build_win/%,$(MENHIRLIB)) $(libdir) ; \
+ 	fi
+ 
+ uninstall:
+--- src/Makefile
++++ src/Makefile
+@@ -32,7 +32,12 @@
+ # Building MenhirLib.
+ 
+ library:
+-	$(OCAMLBUILD) $(LIBFILES)
++	ocamlbuild -build-dir _build_win -classic-display -just-plugin
++	ocamlbuild -build-dir _build_win -classic-display               \
++	  -ocamlc i686-w64-mingw32-ocamlc                               \
++	  -ocamlopt i686-w64-mingw32-ocamlopt                           \
++	  -ocamldep i686-w64-mingw32-ocamldep                           \
++	  $(LIBFILES)
+ 
+ # ----------------------------------------------------------------------------
+ # Building Menhir from scratch (a.k.a. bootstrapping).
+@@ -86,4 +91,4 @@
+ # Cleaning up.
+ 
+ clean::
+-	rm -rf .versioncheck _build _stage1 _stage2 _stage3
++	rm -rf .versioncheck _build _build_win _stage1 _stage2 _stage3
