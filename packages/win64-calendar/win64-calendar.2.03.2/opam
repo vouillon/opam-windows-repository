@@ -1,0 +1,12 @@
+opam-version: "1"
+maintainer: "contact@ocamlpro.com"
+authors: "Julien Signoles"
+homepage: "http://calendar.forge.ocamlcore.org/"
+license: "LGPL-2.1 with OCaml linking exception"
+build: [
+  ["./configure" "--prefix" "%{prefix}%/x86_64-w64-mingw32/"]
+  [make "CAMLC=x86_64-w64-mingw32-ocamlc" "CAMLOPT=x86_64-w64-mingw32-ocamlopt" "CAMLFIND=x86_64-w64-mingw32-ocamlfind" "CAMLLIB=%{prefix}%/x86_64-w64-mingw32/lib/ocaml"]
+  [make "install" "CAMLC=x86_64-w64-mingw32-ocamlc" "CAMLOPT=x86_64-w64-mingw32-ocamlopt" "CAMLFIND=x86_64-w64-mingw32-ocamlfind" "CAMLLIB=%{prefix}%/x86_64-w64-mingw32/lib/ocaml"]
+]
+remove: ["x86_64-w64-mingw32-ocamlfind" "remove" "calendar"]
+depends: ["win64-ocaml" "win64-ocamlfind"]

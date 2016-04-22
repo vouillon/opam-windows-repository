@@ -1,0 +1,9 @@
+opam-version: "1"
+maintainer: "benoit.vaugon@gmail.com"
+authors: [ "Richard Jones" "Christophe Troestler" ]
+license: "LGPL-2.1 with OCaml linking exception"
+homepage: "https://forge.ocamlcore.org/projects/csv/"
+tags: [ "database" "science" ]
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
+depends: [ "win64-ocaml" ]
