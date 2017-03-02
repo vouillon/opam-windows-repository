@@ -1,0 +1,37 @@
+--- Makefile
++++ Makefile
+@@ -171,10 +171,10 @@
+ 	install -m 644 $(MLYLIB) $(libdir)
+ 	@if `$(BUILDDIR)/menhir.$(TARGET) --suggest-ocamlfind` ; then \
+ 	  echo 'Installing MenhirLib via ocamlfind.' ; \
+-	  ocamlfind install menhirLib src/META $(patsubst %,$(BUILDDIR)/%,$(MENHIRLIB)) ; \
++	  x86_64-w64-mingw32-ocamlfind install menhirLib src/META $(patsubst %,src/_build_win/%,$(MENHIRLIB)) ; \
+ 	else \
+ 	  echo 'Installing MenhirLib manually.' ; \
+-	  install -m 644 $(patsubst %,$(BUILDDIR)/%,$(MENHIRLIB)) $(libdir) ; \
++	  install -m 644 $(patsubst %,src/_build_win/%,$(MENHIRLIB)) $(libdir) ; \
+ 	fi
+ # Install the documentation, if it has been built.
+ 	if [ -f manual.pdf ] ; then \
+--- src/Makefile
++++ src/Makefile
+@@ -32,7 +32,12 @@
+ # Building MenhirLib.
+ 
+ library:
+-	$(OCAMLBUILD) $(LIBFILES)
++	ocamlbuild -build-dir _build_win -classic-display -just-plugin
++	ocamlbuild -build-dir _build_win -classic-display               \
++	  -ocamlc x86_64-w64-mingw32-ocamlc                             \
++	  -ocamlopt x86_64-w64-mingw32-ocamlopt                         \
++	  -ocamldep x86_64-w64-mingw32-ocamldep                         \
++	  $(LIBFILES)
+ 
+ # ----------------------------------------------------------------------------
+ # Building Menhir from scratch (a.k.a. bootstrapping).
+@@ -100,4 +105,4 @@
+ # Cleaning up.
+ 
+ clean::
+-	rm -rf .versioncheck _build _stage1 _stage2 _stage3
++	rm -rf .versioncheck _build _build_win _stage1 _stage2 _stage3
