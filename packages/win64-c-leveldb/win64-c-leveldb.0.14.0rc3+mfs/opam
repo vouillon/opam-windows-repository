@@ -1,0 +1,5 @@
+opam-version: "1"
+maintainer: "benoit.vaugon@gmail.com"
+homepage: "https://github.com/google/leveldb"
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
