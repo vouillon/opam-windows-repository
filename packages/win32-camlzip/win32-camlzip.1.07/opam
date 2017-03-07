@@ -1,0 +1,8 @@
+opam-version: "1"
+maintainer: "benoit.vaugon@gmail.com"
+authors: [ "Xavier Leroy" ]
+homepage: "http://forge.ocamlcore.org/projects/camlzip/"
+license: "LGPL-2.1+ with OCaml linking exception"
+build: [[ "./build.sh" "%{prefix}%" ]]
+remove: [[ "./remove.sh" "%{prefix}%" ]]
+depends: [ "win32-ocaml" "win32-c-zlib" ]
