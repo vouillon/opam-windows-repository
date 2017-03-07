@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "benoit.vaugon@gmail.com"
+authors: "Xavier Leroy"
+homepage: "https://forge.ocamlcore.org/projects/zarith"
+build: [
+  [ "env" "CFLAGS=-I%{prefix}%/x86_64-w64-mingw32/lib/c-gmp" "LDFLAGS=-L%{prefix}%/x86_64-w64-mingw32/lib/c-gmp" "./configure" "-host" "i686-cygwin" "-ocamllibdir" "%{prefix}%/x86_64-w64-mingw32/lib" "-installdir" "%{prefix}%/x86_64-w64-mingw32/lib" ]
+  [ make "CC=x86_64-w64-mingw32-gcc" "OCAMLDEP=x86_64-w64-mingw32-ocamldep" "OCAMLC=x86_64-w64-mingw32-ocamlc" "OCAMLOPT=x86_64-w64-mingw32-ocamlopt" "OCAMLMKLIB=x86_64-w64-mingw32-ocamlmklib" "DLLSUFFIX=dll" "EXE=exe" ]
+]
+install: [
+  [ make "install" "DLLSUFFIX=dll" "EXE=exe" ]
+]
+remove:  [
+  "rm" "-Rf" "%{prefix}%/x86_64-w64-mingw32/lib/zarith"
+]
+depends: [
+  "win64-ocaml"
+  "win64-c-gmp"
+  "conf-perl" {build}
+]
